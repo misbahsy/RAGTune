@@ -1,0 +1,11 @@
+ragas 
+langchain_openai 
+python-dotenv
+chromadb
+cohere
+langchainhub
+streamlit
+tqdm
+"unstructured[all-docs]"
+st-pages
+plotly
