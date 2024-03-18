@@ -22,6 +22,7 @@ show_pages(
         Page("Home.py", "Upload Document and Assign Dataset"),
         Page("pages/1_LLM.py", "Evaluate LLM Models"),
         Page("pages/2_embeddings.py", "Evaluate Embeddings"),
+        Page("pages/3_query_tranformations.py", "Evaluate Query Transformations"),
 
     ]
 )
