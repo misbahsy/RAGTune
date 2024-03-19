@@ -27,13 +27,14 @@ Install the required dependencies by running:
 pip install -r requirements.txt
 ```
 
-![Unstructured](https://www.unstructured.io/) is used as a document loader, make sure to install the dependencies mentioned by Unstructured.
-
+[Unstructured](https://www.unstructured.io/) is used as a document loader, make sure to install the dependencies mentioned by Unstructured.
+```plaintext
 libmagic-dev (filetype detection)
 poppler-utils (images and PDFs)
 tesseract-ocr (images and PDFs, install tesseract-lang for additional language support)
 libreoffice (MS Office docs)
 pandoc (EPUBs, RTFs and Open Office docs). Please note that to handle RTF files, you need version 2.14.2 or newer. Running either make install-pandoc or ./scripts/install-pandoc.sh will install the correct version for you.
+```
 
 ### Setting Up Environment Variables
 
@@ -61,11 +62,25 @@ This will start the Streamlit server and open the app in your default web browse
 
 ### Adding LLMs
 
-To add a new LLM for evaluation, you can modify the `pages/1_LLM.py` file. Import the necessary modules and add the LLM to the evaluation chain.
+A few LLMs are added a starting point, feel free to modify the list or add your own LLM provider of choice in the list below:
 
-### Adding Embedding Models
+```python
+llm_options = {
+    "Cohere - command-light": lambda: ChatCohere(model_name="command-light", temperature=temperature, max_tokens=max_tokens),
+    "Cohere - command": lambda: ChatCohere(model_name="command", temperature=temperature, max_tokens=max_tokens),
+    "Cohere - command-r": lambda: ChatCohere(model_name="command-r", temperature=temperature, max_tokens=max_tokens),
+    "OpenAI - gpt-3.5-turbo": lambda: ChatOpenAI(model_name="gpt-3.5-turbo", temperature=temperature, max_tokens=max_tokens),
+    "OpenAI - gpt-4-turbo-preview": lambda: ChatOpenAI(model_name="gpt-4-turbo-preview", temperature=temperature, max_tokens=max_tokens),
+    "OpenAI - gpt-4": lambda: ChatOpenAI(model_name="gpt-4", temperature=temperature, max_tokens=max_tokens),
+    "Anthropic - claude-3-opus-20240229": lambda: ChatAnthropic(model_name="claude-3-opus-20240229", temperature=temperature, max_tokens=max_tokens),
+    "Anthropic - claude-3-sonnet-20240229": lambda: ChatAnthropic(model_name="claude-3-sonnet-20240229", temperature=temperature, max_tokens=max_tokens),
+    "Anthropic - claude-3-haiku-20240307": lambda: ChatAnthropic(model_name="claude-3-haiku-20240307", temperature=temperature, max_tokens=max_tokens),
+    # "Ollama - Gemma": lambda: ChatOllama(model_name="gemma", temperature=temperature, max_tokens=max_tokens),
+}
+```
+Make sure to install any langchain dependencies for the provider and load any necessary api keys in the Home.py file. 
 
-To add a new embedding model, update the `pages/2_embeddings.py` file. Import the embedding model and integrate it with the existing evaluation pipeline.
+You can also add any embedding models, rerankers, query transformation techniques, etc. 
 
 ## Tips
 
