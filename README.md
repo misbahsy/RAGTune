@@ -58,6 +58,33 @@ streamlit run Home.py
 
 This will start the Streamlit server and open the app in your default web browser.
 
+### Dataset
+
+Make sure to first add your files and the corresponding Questions and Groud truth answers for the evaluations. The app will throw errors if this step is not completed. 
+
+### Step-wise Approach
+
+Each section is divided into steps to help you run the app in a step-wise manner. Skipping a step will throw errors. 
+
+Additionally, if you notice an error box on a new tab, most likely it needs for you to run the prior steps before seeing the visual results.
+
+### Evaluation Metrics
+
+This repo uses metrics defined by [Ragas](https://docs.ragas.io/en/stable/concepts/metrics/index.html#). Please refer to Ragas Docs for a deeper understanding of the evaluation metrics.
+
+| Metric Name | Metric Definition |
+|----------------------------------|-----------------------------------------------------------------------|
+| `ragas.metrics.answer_relevancy` | Scores the relevancy of the answer according to the given question. |
+| `ragas.metrics.answer_similarity`| Scores the semantic similarity of ground truth with generated answer. |
+| `ragas.metrics.answer_correctness`| Measures answer correctness compared to ground truth as a combination of factuality and semantic similarity. |
+| `ragas.metrics.context_precision` | Average Precision is a metric that evaluates whether all of the relevant items selected by the model are ranked higher or not. |
+| `ragas.metrics.context_recall`    | Estimates context recall by estimating TP and FN using annotated answer and retrieved context. |
+| `ragas.metrics.context_entity_recall`| Calculates recall based on entities present in ground truth and context. |
+
+### Rerankers
+
+Rerankers are imported from [Rerankers](https://github.com/AnswerDotAI/rerankers) library. Please make sure to add your API keys for the providers you intend to use. For some HF rerankers, you might have to accept the terms of use on the HF website.
+
 ## Customization
 
 ### Adding LLMs
