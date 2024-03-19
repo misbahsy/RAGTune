@@ -8,9 +8,9 @@ cohere
 langchainhub
 streamlit
 tqdm
-"unstructured[all-docs]"
+unstructured[all-docs]
 st-pages
 plotly
-"git+https://github.com/misbahsy/rerankers.git#egg=rerankers[all]"
+git+https://github.com/misbahsy/rerankers.git#egg=rerankers[all]
 langchain-anthropic
 langchain-google-genai
