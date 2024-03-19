@@ -25,6 +25,12 @@ import random
 import string
 import plotly.express as px
 
+from st_pages import add_page_title
+
+add_page_title()
+
+st.sidebar.header("RAGTune")
+
 def generate_random_string(length=10):
     """Generate a random string of alphanumeric characters"""
     characters = string.ascii_letters + string.digits
@@ -128,7 +134,7 @@ def display_embedding_evaluation_results(current_parameter_name):
                     st.write("Overview of Results:")
                     st.write(result["overview"])
                     st.write("Details of Results:")
-                    st.dataframe(result["details"])
+                    st.dataframe(result["details"], use_container_width=True)
 # @st.cache_data
 def prepare_charts(current_parameter_name, is_barchart=False):
     st.subheader("Step 4: Visualize Data")
@@ -167,7 +173,7 @@ def prepare_charts(current_parameter_name, is_barchart=False):
                     st.plotly_chart(fig)
 
             st.write("Dataframe for download")
-            st.dataframe(st.session_state["visual_df"])
+            st.dataframe(st.session_state["visual_df"], use_container_width=True)
     else:
         st.warning("No plots available. Please run the 'Prepare Charts' step first.")
 
@@ -243,7 +249,7 @@ else:
             
 
             chunk_size_step = ( chunk_size_max - chunk_size_min + 1) // chunk_size_data_points
-            chunk_size_step = max(chunk_size_step,1) # Adjust step size to ensure it's at least 1
+            chunk_size_step = max(chunk_size_step-1 , 1) # Adjust step size to ensure it's at least 1
             chunk_size_range = range(chunk_size_min, chunk_size_max + 1, chunk_size_step)
             embedding_results = []
             st.session_state["embedding_results"] = embedding_results

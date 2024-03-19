@@ -9,20 +9,24 @@ load_dotenv()
 # Access the API key from the environment variable
 os.environ['OPENAI_API_KEY'] = os.environ.get("OPENAI_API_KEY")
 os.environ['COHERE_API_KEY'] = os.environ.get("COHERE_API_KEY")
+os.environ['ANTHROPIC_API_KEY'] = os.environ.get("ANTHROPIC_API_KEY")
+
 
 from st_pages import Page, show_pages, add_page_title
+st.sidebar.header("RAGTune")
 
-# Optional -- adds the title and icon to the current page
+# # Optional -- adds the title and icon to the current page
 add_page_title()
 
 # Specify what pages should be shown in the sidebar, and what their titles and icons
-# should be
 show_pages(
     [
         Page("Home.py", "Upload Document and Assign Dataset"),
         Page("pages/1_LLM.py", "Evaluate LLM Models"),
         Page("pages/2_embeddings.py", "Evaluate Embeddings"),
         Page("pages/3_query_tranformations.py", "Evaluate Query Transformations"),
+        Page("pages/4_rerankers.py", "Evaluate Rerankers"),
+        # Page("pages/5_prompt_optimizer.py", "Prompt Optimization using DSPy"), coming soon
 
     ]
 )
@@ -61,18 +65,13 @@ if document_option == 'Upload a file':
 
         # User input for eval_questions and eval_answers
         st.subheader('Provide Evaluation Questions and Answers')
-        # eval_questions = st.text_area("Enter your evaluation questions separated by a newline")
-        # eval_answers = st.text_area("Enter the corresponding answers separated by a newline")
 
-        # # Convert the input to lists
-        # eval_questions_list = eval_questions.split('\n') if eval_questions else []
-        # eval_answers_list = eval_answers.split('\n') if eval_answers else []
         data = {
             'Questions': st.session_state['eval_questions'],
             'Ground Truth': st.session_state['eval_answers']
         }
         qa_df = pd.DataFrame(data)
-        edited_qa_df = st.data_editor(data, num_rows="dynamic")
+        edited_qa_df = st.data_editor(data, num_rows="dynamic", use_container_width=True, hide_index=True)
 
         eval_questions_list = edited_qa_df['Questions']
         eval_answers_list = edited_qa_df['Ground Truth']
@@ -117,20 +116,16 @@ if st.session_state.get('eval_questions') and st.session_state.get('eval_answers
         'Questions': st.session_state['eval_questions'],
         'Ground Truth': st.session_state['eval_answers']
     })
-    st.dataframe(eval_qa_df)
+    st.dataframe(eval_qa_df, use_container_width=True , hide_index=True)
     if len(eval_qa_df["Questions"]) >= 4:
         st.subheader('Proceed to one of the tabs on the left to perform Evaluations')
+        st.page_link("pages/1_LLM.py", label="LLM")
+        st.page_link("pages/2_embeddings.py", label="Embeddings")
+        st.page_link("pages/3_query_tranformations.py", label="Query Tranformations")
+        st.page_link("pages/4_rerankers.py", label="Rerankers")
+
     else:
         st.warning('Please add at least 4 rows of data for evaluation')
     
 else:
     st.header('No evaluation questions and answers provided.')
-
-
-
-# # Run the app
-# if __name__ == '__main__':
-#     st.sidebar.title("Navigation")
-#     st.sidebar.page_link("Home.py", label="Upload Document and Assign Dataset")
-#     st.sidebar.page_link("pages/1_LLM.py", label="Evaluate LLM Models")
-# st.sidebar.info("Step 2: Go to one of the tabs below home to perform the analysis")

@@ -1,5 +1,7 @@
-ragas 
-langchain_openai 
+ragas
+langchain
+langchain-community
+langchain_openai
 python-dotenv
 chromadb
 cohere
@@ -9,3 +11,6 @@ tqdm
 "unstructured[all-docs]"
 st-pages
 plotly
+"git+https://github.com/misbahsy/rerankers.git#egg=rerankers[all]"
+langchain-anthropic
+langchain-google-genai

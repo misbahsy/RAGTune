@@ -27,6 +27,11 @@ import string
 import streamlit as st
 import pandas as pd
 from utils import *
+from st_pages import add_page_title
+
+add_page_title()
+
+st.sidebar.header("RAGTune")
 
 if 'eval_questions' not in st.session_state or 'eval_answers' not in st.session_state or 'doc_path' not in st.session_state:
     st.warning("Please upload a document and save eval questions and answers")
@@ -163,7 +168,7 @@ if 'query_transformation_results' in st.session_state and st.session_state['quer
             st.write(f"Overview of Results for {transformation_name}:")
             st.write(results["overview"])
             st.write(f"Details of Results for {transformation_name}:")
-            st.dataframe(results["details"])
+            st.dataframe(results["details"], use_container_width=True)
 else:
     st.warning("No results available. Please run the evaluation first.")
 
