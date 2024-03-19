@@ -1,7 +1,7 @@
 ragas
 langchain
 langchain-community
-langchain_openai
+langchain-openai
 python-dotenv
 chromadb
 cohere
