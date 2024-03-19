@@ -49,7 +49,7 @@ if document_option == 'Upload a file':
     st.session_state['eval_questions'] = [""]
     st.session_state['eval_answers'] = [""]
     # Allow multiple files to be uploaded including pdf, csv, doc, docx, ppt, pptx
-    uploaded_files = st.file_uploader("Choose files", type=['pdf', 'csv', 'doc', 'docx', 'ppt', 'pptx'], accept_multiple_files=True)
+    uploaded_files = st.file_uploader("Choose files", type=['pdf', 'csv', 'docx', 'pptx'], accept_multiple_files=True)
     if uploaded_files:
         # Ensure the 'uploaded_docs' directory exists before saving the files
         upload_dir = "uploaded_docs"

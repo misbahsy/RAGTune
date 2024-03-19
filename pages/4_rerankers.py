@@ -123,9 +123,9 @@ reranker_options = {
     "Default T5 Seq2Seq reranker": lambda: Reranker("t5"),
     "InRanker-base T5 Seq2Seq reranker": lambda: Reranker("unicamp-dl/InRanker-base", model_type="t5"),
     "Cohere API reranker": lambda: Reranker("cohere", lang='en', api_key=os.environ['COHERE_API_KEY']),
-    "Jina API reranker": lambda: Reranker("jina", api_key=st.secrets["JINA_API_KEY"]),
-    "RankGPT4-turbo": lambda: Reranker("rankgpt", api_key=st.secrets["OPENAI_API_KEY"]),
-    "RankGPT3-turbo": lambda: Reranker("rankgpt3", api_key=st.secrets["OPENAI_API_KEY"]),
+    # "Jina API reranker": lambda: Reranker("jina", api_key=st.secrets["JINA_API_KEY"]),
+    # "RankGPT4-turbo": lambda: Reranker("rankgpt", api_key=st.secrets["OPENAI_API_KEY"]),
+    # "RankGPT3-turbo": lambda: Reranker("rankgpt3", api_key=st.secrets["OPENAI_API_KEY"]),
     "ColBERTv2 reranker": lambda: Reranker("colbert"),
 }
 

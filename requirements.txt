@@ -8,7 +8,7 @@ cohere
 langchainhub
 streamlit
 tqdm
-unstructured[all-docs]
+unstructured[docx,pptx,csv,pdf]
 st-pages
 plotly
 git+https://github.com/misbahsy/rerankers.git#egg=rerankers[all]
